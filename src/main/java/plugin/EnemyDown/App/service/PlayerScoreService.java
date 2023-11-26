@@ -13,7 +13,6 @@ public class PlayerScoreService {
   private PlayerScoreMapper mapper;
 
   public List<PlayerScore> searchPlayerScoreList() {
-
     return mapper.selectPlayerScoreList();
   }
 }
