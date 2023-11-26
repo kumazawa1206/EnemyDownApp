@@ -18,11 +18,22 @@ public class ConfigService {
   }
 
   public GameConfig searchConfig(String difficulty) {
-
     return mapper.selectConfig(difficulty);
   }
 
   public List<SpawnEnemy> searchSpawnEnemyList(String difficulty) {
-    return mapper.selectSpawnEnemy(difficulty);
+    return mapper.selectSpawnEnemyList(difficulty);
+  }
+
+  //登録処理//
+  public GameConfig registerConfig(GameConfig config) {
+    mapper.insertConfig(config);
+    return mapper.selectConfig(config.getDifficulty());
+  }
+
+  //更新処理//
+  public List<SpawnEnemy> updateEnemyScore(SpawnEnemy enemy) {
+    mapper.updateEnemyScore(enemy);
+    return mapper.selectSpawnEnemyList(enemy.getDifficulty());
   }
 }
