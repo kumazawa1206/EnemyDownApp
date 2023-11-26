@@ -3,6 +3,7 @@ package plugin.EnemyDown.App.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import plugin.EnemyDown.App.DuplicateConfigException;
 import plugin.EnemyDown.App.mapper.GameConfigMapper;
 import plugin.EnemyDown.App.mapper.data.GameConfig;
 import plugin.EnemyDown.App.mapper.data.SpawnEnemy;
@@ -26,7 +27,11 @@ public class ConfigService {
   }
 
   //登録処理//
-  public GameConfig registerConfig(GameConfig config) {
+  //例外処理//
+  public GameConfig registerConfig(GameConfig config) throws Exception {
+    if (searchConfig(config.getDifficulty()) != null) {
+      throw new DuplicateConfigException("Duplicate Config Error!!");
+    }
     mapper.insertConfig(config);
     return mapper.selectConfig(config.getDifficulty());
   }
